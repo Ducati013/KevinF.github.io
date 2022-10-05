@@ -3,7 +3,7 @@ output:
   word_document: default
   pdf_document: default
 ---
-# Mis503 - Final Project
+
 # Foley, Kevin
 # Zillow Home Value Index Analysis
 
