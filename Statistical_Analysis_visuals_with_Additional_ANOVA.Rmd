@@ -1,0 +1,148 @@
+---
+output:
+  word_document: default
+  #html_document: default
+---
+# Module 6 - Assignment 2
+# Foley, Kevin
+# Statistical Analyses
+
+```{r}
+library(lubridate)
+library(tidyverse)
+library(readr)
+library(readxl)
+library(corrplot)
+library(RColorBrewer)
+RespiratoryExchangeSample <- read_excel("RespiratoryExchangeSample.xlsx")
+Advertising <- read_csv("Advertising.csv")
+Insurance <- read_csv("Insurance.csv")
+Perceptions <- read_excel("Perceptions.xlsx")
+
+
+```
+
+# Regression and Correlation
+ 
+Regression analysis is a statistical method that allows you to examine the relationship between two or more variables of interest. Correlation analysis is a method of statistical evaluation used to study the strength of a relationship between two, numerically measured, continuous variables (e.g. height and weight). This particular type of analysis is useful when a researcher wants to establish if there are possible connections between variables.
+
+# Insurance Costs
+
+We would like to determine if we can accurately predict insurance costs based upon the factors included in the data. We would also like to know if there are any connections between variables (for example, is age connected or correlated to charges).
+
+# Correlations of bmi,age,children and cost
+
+```{r}
+
+Insurance2 <- Insurance %>% 
+  select(c("age","bmi","children","charges"))
+ins_matrix <- cor(Insurance2)
+#cor(ins)
+corrplot(ins_matrix, type="upper", order="hclust",
+ col=brewer.pal(n=8, name="RdYlBu"))
+```
+
+22.)Based on the matrix and visuals, explain the results from your correlation matrix in a paragraph after the chunk of code. Are any of the variables highly correlated?
+
+I would say a variable with a correlation greater than 0.75 would be highly correlated,and
+based on what I interpret from my chart none of the variables are highly correlated.
+
+# Regression Analysis
+
+```{r linear modeling}
+
+ins_lm<- lm(charges ~ bmi + age + children, data = Insurance2) #  "+" to add variables
+summary(ins_lm)
+
+```
+
+25. Based on the results, which variables were significant and what 
+particular significant variable had the largest impact on charges?
+
+All three varables:bmi,age, and children had a p value that was less than 0.05 which meant they were all significant. The age variable had the most significant impact on the charges based on the p value.
+
+```{r correlation for sex and smoker}
+
+Insurance <- mutate(Insurance, gender=ifelse(sex=="female",1,0)) 
+# ifelse (test,value_if_true, value_if_false
+
+Insurance <- mutate(Insurance,smoker2 = ifelse(smoker=="yes",1,0))
+
+ins_lm2 <- lm(charges ~ bmi + age + children + gender + smoker, data = Insurance)
+summary(ins_lm2)
+```
+
+27.)Does gender and smoking have an impact on cost?   
+The estimate is the increase in cost if that given variable increases by the estimated amount +/- the error. *Bmi,age,children and being a smoker* have the *same p-value* and presumably the *same impact* on the *rate* the insurance company is going to charge an individual. *Gender does not have an impact on cost.*
+
+# Group Comparisons with t-tests
+
+The t-test is used to compare the values of the means from two samples and test whether it is likely that the samples are from populations having different mean values. This is often used to compare 2 groups to see if there are any significant differences between these groups
+
+# Caffeine Impact on Respiratory Exchange Ratio
+
+A study of the effect of caffeine on muscle metabolism used volunteers who each underwent arm exercise tests. Half the participants were randomly selected to take a capsule containing pure caffeine one hour before the test. The other participants received a placebo capsule. During each exercise the subject's respiratory exchange ratio (RER) was measured. (RER is the ratio of CO2 produced to O2 consumed and is an indicator of whether energy is being obtained from carbohydrates or fats).
+
+```{r t.tests}
+
+summary(RespiratoryExchangeSample)
+#t.test(RespiratoryExchangeSample) # this is a on sample t.test
+t.test(RespiratoryExchangeSample$Placebo , RespiratoryExchangeSample$Caffeine)
+#t.test(sleep_wide$group1, sleep_wide$group2)  #t.type uses the welch  type interpretation unless specified
+```
+
+34.) based on the t.test results the average Respiratory exhange rate for the placebo was `r mean(RespiratoryExchangeSample$Placebo)` which was lower than the avearge respiratory exchange rate the Caffeine subjects had at: `r mean(RespiratoryExchangeSample$Caffeine)`. The p_value confirmed there was a significant difference between the two variables as well.
+
+# Impact of Advertising
+
+You are a marketing researcher conducting a study to understand the impact of a new marketing campaign. To test the new advertisements, you conduct a study to understand how consumers will respond based on see the new ad compared to the previous campaign. One group will see the new ad and one group will see the older ads. They will then rate the ad on a scale of 0 to 100 as a percentage of purchase likelihood based on the ad.
+
+*The question you are trying to answer is whether to roll out the new campaign or stick with the current campaign*
+
+```{r t.test for Advertising}
+
+summary(Advertising)
+
+Advertising2 <-  pivot_wider(Advertising, names_from = "Group", values_from = "Rating")
+
+t.test(Rating ~ Group , data= Advertising, var.equal=TRUE)# use,var.equal=TRUE for !Welch
+
+```
+
+There was not a significant difference in the groups watching their respective adds. The p-value would need to less than 0.05 in order to be significant but the p value: 0.2 >.05 indicates that the new advertising campaign should not go forward. 
+
+# ANOVA
+
+An ANOVA test is a way to find out if survey or experiment results are significant. In other words, they help you to figure out if you need to reject the null hypothesis or accept the alternate hypothesis. Basically, you’re testing groups to see if there’s a difference between them. Examples of when you might want to test different groups:
+
+- A group of psychiatric patients are trying three different therapies: counseling, medication and biofeedback. You want to see if one therapy is better than the others.
+- A manufacturer has two different processes to make light bulbs. They want to know if one process is better than the other.
+- Students from different colleges take the same exam. You want to see if one college outperforms the other.
+
+# Perceptions of Social Media Profiles
+
+This study examines how certain information presented on a social media site might influence perceptions of trust, connectedness and knowledge of the profile owner. Specifically, participants were shown weak, average and strong arguments that would influence their perceptions of the above variables. Using the dataset provided, the following code runs an ANOVA with post-hoc analyses to understand argument strength impacts on perceptions.
+
+a. ANOVA 1 – examine the difference of Trust across Argument
+b. ANOVA 2 – examine the difference of Connectedness across Argument
+c. ANOVA 3 – examine the difference of Knowledge across Argument
+
+[R.Cookbook](http://www.cookbook-r.com/Statistical_analysis/ANOVA/#tukey-hsd-post-hoc-test)
+
+```{r warning= FALSE}
+
+ANOVA1 <- aov(Trust ~ Argument, data = Perceptions)  #argument is categorical...
+ANOVA2 <- aov(Connectedness ~ Argument , data = Perceptions)
+ANOVA3 <- aov(Knowledge ~ Argument, data = Perceptions)
+
+TukeyHSD(ANOVA1)
+TukeyHSD(ANOVA2)
+TukeyHSD(ANOVA3)
+
+```
+
+
+Within the *Trust~Argument* analysis the *weak to strong* and *weak to average* were significant while *strong to average* was not significant.The *Connectedness ~ Argument* analysis showed the *strong to average* not being significant while the *weak to average* and *weak to strong* were significant.
+The last analysis with *Knowledge ~ Argument* none of the arguments were significant.
+
+I appears that *Trust* and *Connectedness* can be manipulated with weak to strong and weak to average arguments, but *Knowledge* appears to be unaffected.
