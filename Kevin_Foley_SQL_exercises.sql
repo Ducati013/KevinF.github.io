@@ -1,5 +1,3 @@
-﻿-- Kevin Foley
--- Week 
 
 
 --You are hired as a data analyst to help a company make inventory management and planning decisions.
@@ -110,3 +108,122 @@ Order By
 	round(sum([Order Details].UnitPrice*[Order Details].Quantity*(1-[Order Details].Discount)),2) Desc
 
 
+
+
+
+--Using Northwind
+ 
+-- From the table Products and Categories:
+
+
+-- ***************________________task 1______________*************************
+-- Show the category IDs and names of categories with products ([INNER] JOIN, DISTINCT) 
+-- (8 records).
+
+SELECT 
+	DISTINCT P.CategoryID,
+	C.CategoryName
+FROM
+	Categories C
+JOIN Products P ON C.CategoryID = P.CategoryID 
+ORDER BY
+	C.CategoryName
+		
+
+-- ***************________________task 2______________*************************
+-- Show the category IDs, names of categories, and product names for categories with products. 
+-- Only include discontinued products with non-zero units in stock. 
+-- Order by categories' categoryID ([INNER] JOIN)  
+-- (4 records).
+
+SELECT
+	P.CategoryID,
+	C.CategoryName,
+	P.ProductName
+FROM
+	Categories C--(PK)
+	JOIN Products P ON C.CategoryID = P.CategoryID -- (PK = FK)
+WHERE
+	Discontinued = 1  -- 'True' 
+	AND UnitsInStock > 0
+ORDER BY
+	C.CategoryID
+
+
+-- ***************________________task 3______________*************************
+-- We need a report that tells us everything we need to place an order. 
+-- This should be only non-discontinued products whose 
+-- (unitsInstock + unitsOnOrder) is less than or equal to the Reorderlevel. 
+-- As the final column, it should show how many to order. 
+-- We usually order twice the reorderlevel. 
+-- Columns should be CategoryID, CategoryName, productID, productName, and amount to order. 
+-- Order by CategoryID ([INNER] JOIN) 
+-- (2 records).
+
+SELECT
+	P.CategoryID,
+	C.CategoryName,
+	P.ProductID,
+	P.ProductName,
+	p.ReorderLevel,
+	P.ReorderLevel*2 AS AmountToOrder
+FROM
+	Categories C
+	JOIN Products P ON C.CategoryID = P.CategoryID
+WHERE 
+	P.Discontinued = 0 --'FALSE'
+	AND (P.UnitsInStock + P.UnitsOnOrder) <= P.ReorderLevel
+ORDER BY
+	CategoryID
+
+
+-- ***************________________task 4______________*************************
+-- Do # 4 again, but also add the cost, which will be the order amount multiplied by the unit price 
+-- (2 records).
+
+SELECT
+	P.CategoryID,
+	C.CategoryName,
+	P.ProductID,
+	P.ProductName,
+	P.ReorderLevel*2 AS AmountToOrder,
+	P.ReorderLevel*2*P.UnitPrice AS Cost
+FROM
+	Categories C
+	JOIN Products P ON C.CategoryID = P.CategoryID
+WHERE
+	P.Discontinued = 0 --'False'
+	AND (p.UnitsInStock + P.UnitsOnOrder) <= P.ReorderLevel
+ORDER BY 
+	CategoryID
+
+
+-- ***************________________task 5______________*************************
+-- Show the category IDs and names of categories. 
+-- Include categories even if they don't have any products in them (LEFT [OUTER] JOIN, DISTINCT)
+-- (10 records).
+
+SELECT
+	Distinct P.CategoryID,
+	C.CategoryName
+FROM
+	Categories C
+	LEFT JOIN Products P ON C.CategoryID = P.CategoryID
+ORDER BY
+	CategoryID	
+
+
+-- ***************________________task 6______________*************************
+-- Show the category IDs and names of categories that do not have products in them. (LEFT  [OUTER]  JOIN, WHERE IS NULL) 
+-- (2 records).
+
+SELECT
+	P.CategoryID,
+	C.CategoryName
+FROM
+	Categories C
+	LEFT JOIN Products P ON C.CategoryID = P.CategoryID
+WHERE 
+	P.CategoryID IS NULL
+ORDER BY
+	C.CategoryName
