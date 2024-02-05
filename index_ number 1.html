@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Data Analytics Solutions, ensuring your enterprise is operating at your highest possible levels. I am able to provide visualizations that will quickly summarize key performance indicators for your enterprise.">
+  <meta name="keywords" content="Visualizations, R, Power Bi, Tableau, Excel, Dashboards,JMP, Python, SQL, C++, Page Mapping, Business Analytics, Data Analytics, Data Mining, Digital Marketing, Business Optimization,  ">
+  <meta name="author" content="Kevin Foley">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">  <!--/*,*/ target-densitydpi=device-dpi">-->
+  <title> Data Analytics/ Business Analytics</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+	background-color: #808080;  /*Grey color for whole page*/
+    }
+
+    header {
+      background-color: #0032a3;  /* this is a nice darker blue */
+      background-image: url("images/bg.jpg"); /* Replace 'your-image-url.jpg' with the actual image URL */
+      background-size: cover; /* Adjust as needed */
+      background-position: center; /* Adjust as needed */
+      color: white; /* this was white with the nice dark blue background*/
+      text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; /* Black outline around text */
+      padding: 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+	    /*column;*/
+      align-items: center;
+      width:100%; /* make head full width*/
+    }
+
+    .contact-info {
+      text-align: right; /*center;*/
+      margin-left: auto; /* Push contact info to the right */
+      margin-top: 10px;
+      right: 10px;
+    }
+
+	 /* Define the button styles */
+    .custom-button {
+      display: inline-block;
+      padding: 5px 10px;
+      font-size: 16px;
+      text-align: center;
+      text-decoration: none;
+      border: 2px solid #000; /* Black border */
+      border-radius: 5px; /* Rounded corners */
+      color: #000; /* Text color */
+      background-color: #a6a6a6; /* Background color */
+      cursor: pointer;
+      transition: background-color 0.3s, border-color 0.3s; /* Smooth transition for color changes */
+    }
+
+    /* Change background and border color on hover */
+    .custom-button:hover {
+      background-color: #fff;
+      color: #000;
+      border-color: #8b0000;
+    }
+
+    
+    h1 {
+      font-size: 38px; /* Adjust the font size as needed */
+      text-align: center;
+    }
+
+    main {
+      padding: 20px;
+    }
+
+    .image-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content:  space-around;/*center;*/
+    }
+
+    .image-container figure {
+      width: 300px;
+      height: 300px; /*  was auto, but this makes the images taller;*/
+      margin: 5px;
+      overflow: hidden;
+      position: relative;
+	background-size: contain;
+	padding: 10px;
+    }
+
+    .image-container img {
+      max-width: 300px; /* This is the actual height of the images,  Ensure images don't exceed the width of their container */
+      height: 300px; /*auto; /* Maintain aspect ratio */
+      object-fit: contain;
+      border: 2px solid #000000;
+      border-radius: 8px;
+      cursor: pointer;
+      position: relative;
+      right: 0px;
+
+    }
+
+    .image-container figure figcaption {
+        text-align: center;
+  	position: absolute;
+  	top: 0;
+ 	left: 0;
+ 	right: 0;
+	background-color:  rgba(0, 0, 0, 0.7);
+  	color: white;
+  	padding: 7px;
+  	border-radius: 8px 8px 0 0; /* Rounded corners only at the top */
+      
+
+    }
+	  
+/* Style for the logo in the header */
+    .header-logo {
+      width: 25%; /*0px; /* Adjust the width as needed */
+      height: auto; /* Maintain aspect ratio */
+      margin-right: 5px; /* Add some right margin for spacing */
+    }
+ /* This is where the click down menu Title begins-->*/
+.menu-title {
+        background-color: #78BCA4;;
+        color: white;
+        text-align: left;
+        padding: 10px;
+        }
+	  
+  /* This is where the click down menu begins-->*/
+    nav {
+    background-color: #78BCA4;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+        nav a {
+	    color: white;
+            text-decoration: none;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+	    cursor: pointer; /* Add this to show a pointer cursor on hover */
+	    font-size: 26px; /* Adjust the font size as needed */
+        }
+
+        nav img {
+            width: 350px; /* Adjust the size of the images as needed */
+            height: auto;
+            margin-bottom: 5px;
+        }
+	  .has-submenu {
+            position: relative;
+        }
+
+       .submenu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            /*left: 0;  */
+	    left: 0%; /* Center the submenu horizontally */
+            background-color: #000000;
+	    background-image: url("images/Blackboard background2.png"); /* Replace 'your-image-url.jpg' with the actual image URL */
+            background-size: cover; /* Adjust as needed */
+	    /*background-height: cover;  Adjust as needed 
+            background-position: center;  Adjust as needed */
+            min-width: 160px;
+            z-index: 1;
+        }
+
+	.submenu a {
+            color: white;
+            padding: 12px;
+            text-decoration: none;
+            display: block;
+        }
+
+   
+ /* Media query for screens up to 600px */
+   @media (min-width:600 px, max-width: 100%) {
+      header {
+        width: 100%;
+	padding: 10px;
+	
+	
+      }
+
+      .contact-info {
+        text-align: center;
+        margin-left: auto;
+        margin-top: 5px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+
+      .image-container figure {
+        width: 100%;
+        
+      }
+
+     nav {
+                flex-direction: row; /* Revert to horizontal layout */
+                justify-content: space-between;
+            }
+
+	
+  </style>
+</head>
+<body>
+  <header>
+     <!-- Another Page button on the left side
+    <a href="images/Dashboards_Dynamic.jpg" class="custom-button">Projects</a> -->
+    <img src="images/Me1.JPG" alt="This is me" class="header-logo"> <!-- Replace with your actual logo image -->
+    
+    <h1>Welcome to Kevin Foley's Portfolio</h1>
+    <div class="contact-info" style="color: white; font-family: Didactic">
+      <p>Contact Info:</p>
+      <p>Email: krfoley013@gmail.com</p>
+      <p>Email: krf8301@uncw.edu</p>
+      <p><a href="https://www.linkedin.com/in/kevin-foley-1691b1a1" style="color: white; font-family: Didactic, class="custom-button"><strong style="color: white;">LinkedIn</strong    ></a> </br></p>
+      <p><a href="https://bold.pro/my/kevin-foley-230502142051" style="color: white; font-size: 16px; font-family: Didactic", class="custom-button"><strong style="color: white;">Resume</strong>     </a></p>
+    </div>
+  </header>
+
+	<main>
+<!-- Menu Title Begins -->
+<div class="menu-title">
+    <h2>Main Menu: select for menu</h2>
+</div>
+
+		
+<nav>
+		
+   <div class="has-submenu">
+        <a href="#">
+            Visualizations
+	    <img src="images/Forecast_Dash.png" alt="Tableau Visualizations">
+        </a>
+        <div class="submenu">
+            <a href="images/Tableau customer satisfaction.jpg" >Tableau Customer Satisfaction</a>
+            <a href="images/Forecast_Dash.png">Tableau Forecasting Dashboard</a>
+	    <a href="images/Raleigh_Forecast.png">Tableau Forcasting Raleigh NC Home Values</a>
+            <a href="images/Power BI chart.png">Power BI Dashboard</a>
+	    <a href= "exceldashboards.html">Excel Dashboards</a>
+		<!-- Add more submenu items as needed -->
+        </div>
+    </div>
+<div class="has-submenu">
+	<a href="#">
+	    R Analytics
+	    <img src="images/4waywindowZHVI_analysis_Chi_Denver_Hou_NY.png" alt="R Analytics">
+	</a>
+	<div class="submenu">
+	    <a href="https://kevinfoley013.shinyapps.io/InjuriesApp"  >R's Shiny Application</a>
+	    <a href="RMD_Pivot_tables.html">R's TidyData</a>
+	    <a href="DataAnalysisWithRMD.html">Zillow home Value Analysis with R</a>
+	    <!-- Add more submenu items as needed -->
+	</div>
+    </div>
+<div class="has-submenu">
+        <a href="#"> 
+	     Data Mining With R
+	     <img src="images/Forecast_Dash.png" alt="Mining to gain insight into Game of Thrones, I haven't watched it yet." >
+          </a>
+        <div class="submenu">
+            <a href="images/GOT Analysis.html" >Mining to gain insight into Game of Thrones,Spoilers!.</a>
+            <!--<a href="images/Forecast_Dash.png">Tablaeu Forecasting Dashboard</a>
+             Add more submenu items as needed -->
+        </div>
+    </div>
+	<div class="has-submenu">
+        <a href="#">
+	    Python Analytics
+            <img src="R_python_test_images/pyDT.png" alt="Python Decision Tree Regression Modeling">
+        </a>
+        <div class="submenu">
+            <a href=<a href= "pythonLogisticalRegression.html">Python Logistic Regression Modeling</a>
+            <a href= "PythonLinearRegressionFast.html">Python Linear Regression Fast Modeling</a>
+	    <a href= "python DecisionTreeRegression modeling.html">	Python Decision Tree Regression Modeling</a>
+            <!-- Add more submenu items as needed -->
+        </div>
+    </div>
+ </div>
+	<div class="has-submenu">
+        <a href="#">
+	   Additional Services
+            <img src="images/Sql_Practice.jpg" alt="SQL Example">
+        </a>
+        <div class="submenu">
+            <a href="SQL.html">SQL Example</a>
+            <a href="images/JMP.png" >SAS's JMP example</a>
+	    <a href="images/Power BI chart.png">Power BI Dashboard</a>
+	    <a href= "exceldashboards.html">Excel Dashboards</a>
+            <!-- Add more submenu items as needed -->
+        </div>
+    </div>
+   
+</nav>
+		
+		
+<!-- This is the section for making the click down menue collapse 
+<script> <!-- this one keeps all the submenus open when clicked 
+    document.addEventListener('DOMContentLoaded', function () {
+        const menuItems = document.querySelectorAll('.has-submenu');
+
+        menuItems.forEach(item => {
+            const anchor = item.querySelector('a');
+            anchor.addEventListener('click', function (event) {
+                event.preventDefault(); // Prevent the default anchor behavior
+                const submenu = item.querySelector('.submenu');
+                const rect = anchor.getBoundingClientRect();
+                submenu.style.top = rect.bottom + 'px';
+                submenu.style.left = rect.left + 'px';
+                submenu.style.display = (submenu.style.display === 'block') ? 'none' : 'block';
+            });
+        });
+    });
+</script>-->
+	<!--This one will close the submenu when another menu is clicked and will open the new menu's submenu
+		<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const menuItems = document.querySelectorAll('.has-submenu');
+
+        menuItems.forEach(item => {
+            const anchor = item.querySelector('a');
+            anchor.addEventListener('click', function (event) {
+                event.preventDefault(); // Prevent the default anchor behavior
+                
+                // Close all open submenus
+                document.querySelectorAll('.submenu').forEach(submenu => {
+                    submenu.style.display = 'none';
+                });
+
+                const submenu = item.querySelector('.submenu');
+                const rect = anchor.getBoundingClientRect();
+                submenu.style.top = rect.bottom + 'px';
+                submenu.style.left = rect.left + 'px';
+                submenu.style.display = 'block';
+            });
+        });
+
+        // Close all submenus when clicking outside of the nav
+        document.addEventListener('click', function (event) {
+            if (!event.target.closest('nav')) {
+                document.querySelectorAll('.submenu').forEach(submenu => {
+                    submenu.style.display = 'none';
+                });
+            }
+        });
+    });
+</script> -->
+
+<!-- This will add a paragraph under the menus -->
+<div class="content">
+    <p>This is some text under the menu That I need to adjust.</p>
+</div>
+<!-- End Paragraph-->
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const menuItems = document.querySelectorAll('.has-submenu');
+
+    menuItems.forEach(item => {
+      const image = item.querySelector('img');
+      const submenu = item.querySelector('.submenu');
+
+      image.addEventListener('click', function (event) {
+        event.preventDefault(); // Prevent the default image behavior
+
+        // Toggle the submenu display
+        submenu.style.display = (submenu.style.display === 'block') ? 'none' : 'block';
+
+        // Close all other open submenus
+        document.querySelectorAll('.has-submenu').forEach(otherItem => {
+          if (otherItem !== item) {
+            otherItem.querySelector('.submenu').style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Close all submenus when clicking outside of the nav
+    document.addEventListener('click', function (event) {
+      if (!event.target.closest('.has-submenu')) {
+        document.querySelectorAll('.submenu').forEach(submenu => {
+          submenu.style.display = 'none';
+        });
+      }
+    });
+  });
+</script>
+<!-- END section for making the click down menue collapse  END-->
+
+<!-- This Section Begins the Large images with hyper links section-->
+ 		<div class="image-container">
+			        <!-- Row 1 -->
+			<figure>
+			        <a href="images/GOT Analysis.html">
+			          <img src="images/Data mining.jpg" alt="Image 1" title="Mining to gain insight into Game of Thrones, I haven't watched it yet." onclick="showCaption('Let&apos;s Go')">
+			        </a>
+			        <figcaption>Data mining Game of Thrones</figcaption>
+			</figure>
+			
+			<figure>
+				 <a href="images/Forecast_Dash.png">
+			           <img src="images/Forecast_Dash.png" alt="Image 2" title="Tableau Forecasting Dashboard" onclick="showCaption('Let&apos;s Go')">
+				 </a>
+				 <figcaption>Tableau Forecasting Dashboard</figcaption>
+			 </figure>
+			
+			<figure>
+				 <a href="images/Power BI chart.png" >
+			           <img src= "images/Power BI chart.png" alt="Image 3" title="Sorry for the poor image quality, preserving client confidentiality" onclick="showCaption('Let&apos;s Go')">
+				 </a>
+				 <figcaption>Power BI Dashboard</figcaption>
+			 </figure>
+
+			<figure>
+				<a href= "exceldashboards.html">
+			          <img src="R_python_test_images/dashboardcover.png" alt="SQL" title="Excel Dashboards" onclick="showCaption('Let&apos;s Go')">
+			        </a>
+				<figcaption>Excel Dashboards</figcaption>
+			</figure>
+
+			<figure>
+				 <a href="images/JMP.png" >
+			           <img src= "images/JMP.png" alt="image4" title="JMP Using all available methods " >
+				 </a>
+				 <figcaption>JMP Demonstration</figcaption>
+			 </figure>
+
+			<figure>
+				<a href="DataAnalysisWithRMD.html"> 
+			          <img src="images/4waywindowZHVI_analysis_Chi_Denver_Hou_NY.png" title="R Analytics"  alt="Image 4" >
+			        </a>
+				<figcaption>R Analytics</figcaption>
+			</figure>
+
+			<figure>
+				<a href= "python LinearRegression Modeling.html">
+			          <img src="R_python_test_images/pyLM.png" alt="SQL" title="Python Linear Regression Modeling">
+			        </a>
+				<figcaption>Python Linear Regression Modeling</figcaption>
+			</figure>
+
+			 <figure>
+				<a href="SQL.html">
+			          <img src="images/Sql_Practice.jpg" alt="SQL" title="SQL Demonstration">
+			        </a>
+				<figcaption>SQL Demonstration</figcaption>
+			</figure>
+
+			 <figure>
+				<a href="https://kevinfoley013.shinyapps.io/InjuriesApp" > 
+			          <img src="images/ShinyApp.jpg" alt="Image 5" title="R's Shiny application">
+			        </a>
+				<figcaption>R's Shiny application</figcaption>
+			</figure>
+
+			<figure>
+				<a href="RMD_Pivot_tables.html"> 
+			          <img src="images/PivotTables.jpg" alt="Image 3" title="R cleaned tidy data">
+				</a>
+				<figcaption>R cleaned tidy data</figcaption>
+			</figure>
+
+
+			<figure>
+				<a href="images/Raleigh_Forecast.png">
+			          <img src="images/Raleigh_Forecast.png"  alt="image 1" title="Tableau Forecasting" >
+				</a>
+				<figcaption>Tableau Forecasting </figcaption>
+			 </figure>
+			 
+			<figure>
+				 <a href="images/Tableau customer satisfaction.jpg">
+			           <img src="images/Tableau customer satisfaction.jpg" alt="Image 2.2" title="Tableau customer satisfaction" >
+				 </a>
+				 <figcaption>Tableau customer satisfaction</figcaption>
+			 </figure>
+			
+			<figure>
+				<a href= "python DecisionTreeRegression modeling.html">
+			          <img src="R_python_test_images/pyDT.png"alt="SQL" title="Python Decision Tree Regression Modeling" >
+			        </a>
+				<figcaption>Python Decision Tree Regression Modeling</figcaption>
+			 </figure>
+			<figure>
+				<a href= "PythonLinearRegressionFast.html">
+			          <img src="images/pyLMRF.png" alt="SQL" title="Python Linear Regression Fast Modeling" >
+			        </a>
+				<figcaption>Python Linear Regression Fast Modeling</figcaption>
+			 </figure>
+			
+			
+			<figure>
+				<a href= "pythonLogisticalRegression.html">
+			          <img src="images/pyLogLMCover.png" alt="SQL" title="Python Logistic Regression Modeling" >
+			        </a>
+				<figcaption>Python Logistic Regression Modeling</figcaption>
+			</figure>
+		
+		</div>
+
+	     </main>
+
+	</body>
+</html>
+
